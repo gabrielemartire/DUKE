@@ -3,6 +3,7 @@ const input = document.getElementById('inputFile');
 const openFile = document.getElementById('openPDF');
 const currentPage = document.getElementById('current_page');
 const viewer = document.querySelector('.pdf-viewer');
+const searchResults = document.getElementById('search-results');
 let currentPDF = {}
 
 function resetCurrentPDF() {
@@ -10,10 +11,9 @@ function resetCurrentPDF() {
 		file: null,
 		countOfPages: 0,
 		currentPage: 1,
-		zoom: 1.5
+		zoom: 0.25 // Ridimensiona il PDF a un quarto della pagina
 	}
 }
-
 
 openFile.addEventListener('click', () => {
 	input.click();
@@ -30,7 +30,7 @@ input.addEventListener('change', event => {
 		}
 	}
 	else {
-		alert("The file you are trying to open is not a pdf file!")
+		alert("Il file che stai cercando di aprire non è un file PDF!")
 	}
 });
 
@@ -86,7 +86,7 @@ function renderCurrentPage() {
         };
 
         // Render the page
-        // page.render(renderContext);
+        page.render(renderContext);
 
         // Get the text content of the page
         page.getTextContent().then((textContent) => {
@@ -94,21 +94,27 @@ function renderCurrentPage() {
             var pageText = textContent.items.map(function (item) {
                 return item.str;
             }).join(' ');
-            console.log(pageText);
-            console.log(textContent.items);
 
             // List of words to search for
-            var wordsToSearch = ['pippo', 'pluto', 'paperino'];
+            var wordsToSearch = ['stelle', 'asd', 'paperino'];
+            var foundElements = [];
+
             // Check if any of the words exist on the page
             wordsToSearch.forEach((word) => {
                 var regex = new RegExp(word, 'gi'); // 'gi' flag for global and case-insensitive search
                 var matches = pageText.match(regex);
                 if (matches) {
-                    console.log(`Word '${word}' found on page ${currentPDF.currentPage}`);
-                } else {
-                    console.log(`Word '${word}' not found on page ${currentPDF.currentPage}`);
+                    foundElements.push({ word, count: matches.length });
                 }
             });
+
+            // Display search results
+            let resultsHTML = '<ul>';
+            foundElements.forEach((element) => {
+                resultsHTML += `<li>${element.word}: ${element.count}</li>`;
+            });
+            resultsHTML += '</ul>';
+            searchResults.innerHTML = resultsHTML;
         });
     });
 
