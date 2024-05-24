@@ -73,17 +73,44 @@ function loadPDF(data) {
 }
 
 function renderCurrentPage() {
-	currentPDF.file.getPage(currentPDF.currentPage).then((page) => {
-		var context = viewer.getContext('2d');
-		var viewport = page.getViewport({ scale: currentPDF.zoom, });
-		viewer.height = viewport.height;
-		viewer.width = viewport.width;
+    currentPDF.file.getPage(currentPDF.currentPage).then((page) => {
 
-		var renderContext = {
-			canvasContext: context,
-			viewport: viewport
-		};
-		page.render(renderContext);
-	});
-	currentPage.innerHTML = currentPDF.currentPage + ' of ' + currentPDF.countOfPages;
+        var context = viewer.getContext('2d');
+        var viewport = page.getViewport({ scale: currentPDF.zoom });
+        viewer.height = viewport.height;
+        viewer.width = viewport.width;
+
+        var renderContext = {
+            canvasContext: context,
+            viewport: viewport
+        };
+
+        // Render the page
+        // page.render(renderContext);
+
+        // Get the text content of the page
+        page.getTextContent().then((textContent) => {
+            // Convert textContent.items to a string
+            var pageText = textContent.items.map(function (item) {
+                return item.str;
+            }).join(' ');
+            console.log(pageText);
+            console.log(textContent.items);
+
+            // List of words to search for
+            var wordsToSearch = ['pippo', 'pluto', 'paperino'];
+            // Check if any of the words exist on the page
+            wordsToSearch.forEach((word) => {
+                var regex = new RegExp(word, 'gi'); // 'gi' flag for global and case-insensitive search
+                var matches = pageText.match(regex);
+                if (matches) {
+                    console.log(`Word '${word}' found on page ${currentPDF.currentPage}`);
+                } else {
+                    console.log(`Word '${word}' not found on page ${currentPDF.currentPage}`);
+                }
+            });
+        });
+    });
+
+    currentPage.innerHTML = currentPDF.currentPage + ' of ' + currentPDF.countOfPages;
 }
