@@ -16,8 +16,13 @@ function resetCurrentPDF() {
 }
 
 openFile.addEventListener('click', () => {
-	input.click();
+    const keywordsInput = document.getElementById('exampleFormControlTextarea1').value;
+    wordsToSearch = keywordsInput.split(',').map(keyword => keyword.trim());
+    console.log(wordsToSearch);
+    // Ora l'array wordsToSearch è popolato con le parole inserite nel modal
+    input.click();
 });
+
 
 input.addEventListener('change', event => {
 	const inputFile = event.target.files[0];
@@ -96,8 +101,7 @@ function renderCurrentPage() {
             }).join(' ');
 
             // List of words to search for
-            var wordsToSearch = ['stelle', 'asd', 'paperino'];
-            var foundElements = [];
+              var foundElements = [];
 
             // Check if any of the words exist on the page
             wordsToSearch.forEach((word) => {
@@ -120,3 +124,5 @@ function renderCurrentPage() {
 
     currentPage.innerHTML = currentPDF.currentPage + ' of ' + currentPDF.countOfPages;
 }
+
+
