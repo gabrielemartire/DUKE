@@ -12,7 +12,10 @@ document.getElementById('searchButton').addEventListener('click', async () => {
   const words = wordsInput.split(',').map(word => word.trim());
   const arrayBuffer = await fileInput.arrayBuffer();
 
-  const pdf = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
+  // Set the workerSrc property
+  pdfjsLib.GlobalWorkerOptions.workerSrc = 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.2.67/build/pdf.worker.min.js';
+
+  const pdf = await pdfjsLib.getDocument({ data: arrayBuffer }).promise;
   let pdfText = '';
 
   for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
