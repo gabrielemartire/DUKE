@@ -1,26 +1,24 @@
 <!DOCTYPE html>
-<html lang="it">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ricerca in PDF</title>
-  <script type="module"> import pdfjsDist from 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.2.67/+esm' </script>
-//    https://www.jsdelivr.com/package/npm/pdfjs-dist -->
-  <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PDF Word Search</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <h1>Ricerca in un file PDF</h1>
-
-  <form id="searchForm">
-    <label for="fileInput">Seleziona un file PDF:</label>
-    <input type="file" id="fileInput" name="file">
-
-    <label for="searchText">Inserisci le parole da cercare:</label>
-    <input type="text" id="searchText" name="searchText">
-
-    <button type="submit" id="submitButton">Cerca</button>
-  </form>
-
-  <div id="searchResults"></div>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/2.15.314/pdf.min.js"></script>  <script src="script.js"></script>  </body>
+    <div class="container">
+        <h1>PDF Word Search</h1>
+        <input type="file" id="fileInput" accept="application/pdf" />
+        <input type="text" id="wordsInput" placeholder="Enter words separated by commas" />
+        <button id="searchButton">Search</button>
+        <h2>Results:</h2>
+        <ul id="results"></ul>
+    </div>
+    <script type="module">
+        import * as pdfjsLib from 'https://cdn.jsdelivr.net/npm/pdfjs-dist@4.2.67/+esm';
+        import './script.js';
+        window.pdfjsLib = pdfjsLib;
+    </script>
+</body>
 </html>

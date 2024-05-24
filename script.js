@@ -1,50 +1,33 @@
-const inputFile = document.getElementById('fileInput');
-const textBox = document.getElementById('searchText');
-const submitButton = document.getElementById('submitButton');
-const resultsContainer = document.getElementById('searchResults');
+document.getElementById('searchButton').addEventListener('click', async () => {
+  const fileInput = document.getElementById('fileInput').files[0];
+  const wordsInput = document.getElementById('wordsInput').value;
+  const resultsElement = document.getElementById('results');
+  resultsElement.innerHTML = '';
 
-submitButton.addEventListener('click', () => {
-  if (inputFile.files.length === 0 || !textBox.value) {
-    alert('Seleziona un file PDF e inserisci le parole da cercare');
-    return;
+  if (!fileInput || !wordsInput) {
+      alert('Please select a PDF file and enter words to search.');
+      return;
   }
 
-  const file = inputFile.files[0];
-  const searchText = textBox.value;
+  const words = wordsInput.split(',').map(word => word.trim());
+  const arrayBuffer = await fileInput.arrayBuffer();
 
-  // Caricare e analizzare il file PDF utilizzando PDF.js
-  PDFJS.getDocument({ data: file }).promise.then(pdf => {
-    let allPagesText = '';
+  const pdf = await pdfjsLib.getDocument({data: arrayBuffer}).promise;
+  let pdfText = '';
 
-    // Estrarre il testo da tutte le pagine del PDF
-    const promises = [];
-    for (let i = 1; i <= pdf.numPages; i++) {
-      promises.push(pdf.getPage(i).then(page => page.getTextContent()));
-    }
-
-    Promise.all(promises).then(pageTexts => {
-      pageTexts.forEach(text => {
-        allPagesText += text;
+  for (let pageNum = 1; pageNum <= pdf.numPages; pageNum++) {
+      const page = await pdf.getPage(pageNum);
+      const textContent = await page.getTextContent();
+      textContent.items.forEach(item => {
+          pdfText += item.str + ' ';
       });
+  }
 
-      // Cercare le parole chiave nel testo estratto
-      const searchResults = [];
-      const re = new RegExp(searchText, 'gi');
-      const matches = allPagesText.matchAll(re);
-      for (const match of matches) {
-        searchResults.push({
-          page: match.index / allPagesText.length * 100 + 1, // Calcola il numero di pagina approssimativo
-          text: match[0],
-        });
-      }
+  const foundWords = words.filter(word => pdfText.includes(word));
 
-      // Visualizzare i risultati di ricerca
-      resultsContainer.innerHTML = '';
-      searchResults.forEach(result => {
-        const resultElement = document.createElement('div');
-        resultElement.innerHTML = `Pagina: ${result.page} - Testo: ${result.text}`;
-        resultsContainer.appendChild(resultElement);
-      });
-    });
+  foundWords.forEach(word => {
+      const li = document.createElement('li');
+      li.textContent = word;
+      resultsElement.appendChild(li);
   });
 });
