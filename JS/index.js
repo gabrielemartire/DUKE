@@ -4,14 +4,16 @@ const openFile = document.getElementById('openPDF');
 const currentPage = document.getElementById('current_page');
 const viewer = document.querySelector('.pdf-viewer');
 const searchResults = document.getElementById('search-results');
-let currentPDF = {}
+let currentPDF = {};
+let wordsToSearch = [];
 
 function resetCurrentPDF() {
 	currentPDF = {
 		file: null,
 		countOfPages: 0,
 		currentPage: 1,
-		zoom: 0.25 // Ridimensiona il PDF a un quarto della pagina
+		zoom: 0.5,
+		foundElements: []
 	}
 }
 
@@ -23,22 +25,19 @@ openFile.addEventListener('click', () => {
     input.click();
 });
 
-
 input.addEventListener('change', event => {
 	const inputFile = event.target.files[0];
-	if (inputFile.type == 'application/pdf') {
+	if (inputFile.type === 'application/pdf') {
 		const reader = new FileReader();
 		reader.readAsDataURL(inputFile);
 		reader.onload = () => {
 			loadPDF(reader.result);
 			zoomButton.disabled = false;
 		}
-	}
-	else {
+	} else {
 		alert("Il file che stai cercando di aprire non è un file PDF!")
 	}
 });
-
 
 zoomButton.addEventListener('input', () => {
 	if (currentPDF.file) {
@@ -72,57 +71,66 @@ function loadPDF(data) {
 		currentPDF.countOfPages = doc.numPages;
 		viewer.classList.remove('hidden');
 		document.querySelector('main h3').classList.add("hidden");
-		renderCurrentPage();
+		processAllPages();
 	});
+}
 
+function processAllPages() {
+	let pagePromises = [];
+	for (let i = 1; i <= currentPDF.countOfPages; i++) {
+		pagePromises.push(currentPDF.file.getPage(i).then(processPage));
+	}
+	Promise.all(pagePromises).then(() => {
+		displaySearchResults();
+	});
+}
+
+function processPage(page) {
+	return page.getTextContent().then((textContent) => {
+		var pageText = textContent.items.map(function (item) {
+			return item.str;
+		}).join(' ');
+
+		wordsToSearch.forEach((word) => {
+			var regex = new RegExp(word, 'gi'); // 'gi' flag for global and case-insensitive search
+			var matches = pageText.match(regex);
+			if (matches) {
+				let foundElement = currentPDF.foundElements.find(element => element.word === word);
+				if (foundElement) {
+					foundElement.count += matches.length;
+				} else {
+					currentPDF.foundElements.push({ word, count: matches.length });
+				}
+			}
+		});
+	});
+}
+
+function displaySearchResults() {
+	let resultsHTML = '<ul>';
+	currentPDF.foundElements.forEach((element) => {
+		resultsHTML += `<li>${element.word}: ${element.count}</li>`;
+	});
+	resultsHTML += '</ul>';
+	searchResults.innerHTML = resultsHTML;
+	renderCurrentPage(); // Optional: To render the first page after processing all pages
 }
 
 function renderCurrentPage() {
-    currentPDF.file.getPage(currentPDF.currentPage).then((page) => {
+	currentPDF.file.getPage(currentPDF.currentPage).then((page) => {
+		var context = viewer.getContext('2d');
+		var viewport = page.getViewport({ scale: currentPDF.zoom });
+		viewer.height = viewport.height;
+		viewer.width = viewport.width;
 
-        var context = viewer.getContext('2d');
-        var viewport = page.getViewport({ scale: currentPDF.zoom });
-        viewer.height = viewport.height;
-        viewer.width = viewport.width;
+		var renderContext = {
+			canvasContext: context,
+			viewport: viewport
+		};
 
-        var renderContext = {
-            canvasContext: context,
-            viewport: viewport
-        };
+		// Render the page
+		page.render(renderContext);
 
-        // Render the page
-        page.render(renderContext);
-
-        // Get the text content of the page
-        page.getTextContent().then((textContent) => {
-            // Convert textContent.items to a string
-            var pageText = textContent.items.map(function (item) {
-                return item.str;
-            }).join(' ');
-
-            // List of words to search for
-              var foundElements = [];
-
-            // Check if any of the words exist on the page
-            wordsToSearch.forEach((word) => {
-                var regex = new RegExp(word, 'gi'); // 'gi' flag for global and case-insensitive search
-                var matches = pageText.match(regex);
-                if (matches) {
-                    foundElements.push({ word, count: matches.length });
-                }
-            });
-
-            // Display search results
-            let resultsHTML = '<ul>';
-            foundElements.forEach((element) => {
-                resultsHTML += `<li>${element.word}: ${element.count}</li>`;
-            });
-            resultsHTML += '</ul>';
-            searchResults.innerHTML = resultsHTML;
-        });
-    });
-
-    currentPage.innerHTML = currentPDF.currentPage + ' of ' + currentPDF.countOfPages;
+		currentPage.innerHTML = currentPDF.currentPage + ' of ' + currentPDF.countOfPages;
+	});
 }
-
-
