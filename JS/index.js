@@ -45,6 +45,8 @@ function loadPDF(data) {
         currentPDF.file = doc;
         currentPDF.countOfPages = doc.numPages;
         viewer.classList.remove('hidden');
+        document.querySelector('main h3').classList.add("hidden");
+        document.getElementById('export-pdf-btn').classList.remove("hidden");
         processAllPages();
     });
 }
