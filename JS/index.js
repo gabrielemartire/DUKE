@@ -39,30 +39,6 @@ input.addEventListener('change', event => {
 	}
 });
 
-zoomButton.addEventListener('input', () => {
-	if (currentPDF.file) {
-		document.getElementById('zoomValue').innerHTML = zoomButton.value + "%";
-		currentPDF.zoom = parseInt(zoomButton.value) / 100;
-		renderCurrentPage();
-	}
-});
-
-document.getElementById('next').addEventListener('click', () => {
-	const isValidPage = currentPDF.currentPage < currentPDF.countOfPages;
-	if (isValidPage) {
-		currentPDF.currentPage += 1;
-		renderCurrentPage();
-	}
-});
-
-document.getElementById('previous').addEventListener('click', () => {
-	const isValidPage = currentPDF.currentPage - 1 > 0;
-	if (isValidPage) {
-		currentPDF.currentPage -= 1;
-		renderCurrentPage();
-	}
-});
-
 function loadPDF(data) {
 	const pdfFile = pdfjsLib.getDocument(data);
 	resetCurrentPDF();
@@ -70,7 +46,7 @@ function loadPDF(data) {
 		currentPDF.file = doc;
 		currentPDF.countOfPages = doc.numPages;
 		viewer.classList.remove('hidden');
-		document.querySelector('main h3').classList.add("hidden");
+		//document.getElementById('btn-import-pdf').classList.add("hidden");
 		processAllPages();
 	});
 }
