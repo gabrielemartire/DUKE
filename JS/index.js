@@ -89,7 +89,7 @@ function displaySearchResults() {
     });
     resultsHTML += '</ul>';
     searchResults.innerHTML = resultsHTML;
-    searchResults.innerHTML += '<button id="search-again" class="btn btn-dark mt-3"><i class="fa-solid fa-repeat"></i> Cerca di nuovo</button>';
+    searchResults.innerHTML += '<button id="search-again" class="btn btn-dark mt-3"><i class="fa-solid fa-repeat"></i> Cerca di nuovo sullo stesso PDF</button>';
     renderCurrentPage();
 
     document.getElementById('search-again').addEventListener('click', () => {

@@ -7,7 +7,7 @@
 </div>
 
 ## ***Project description***
-> _Find find a long list of KWs divided by `,`_
+> _Find a long list of KWs divided by `,`_
 
 - 🔗 https://gabrielemartire.github.io/find_for_me/
 - 📌 pdfjs linK
@@ -31,5 +31,3 @@ ERR
 
 > [!IMPORTANT]
 > !!!
-
-![asd](https://media2.giphy.com/media/v1.Y2lkPTc5MGI3NjExaXhjbGhvd3NjaGI0YmxxcGYxZmx5ZTcydjI0b3AzaWF4cHZ5cGU2ZCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9cw/KsBC8HSDKs3MC03Xf2/giphy.gif)

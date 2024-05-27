@@ -27,18 +27,23 @@
                   🔬PDF Keywords finder
               </a>
               <button id="btn-import-pdf" type="button" class="btn btn-dark btn-lg" data-bs-toggle="modal" data-bs-target="#ModalImprot">
-                  <i class="fa-solid fa-file-pdf"></i>Import PDF
+                  <i class="fa-solid fa-file-pdf"></i> Importa PDF
               </button>
               <button type="button" class="btn btn-outline-dark btn-md position-relative" data-bs-toggle="modal" data-bs-target="#ModalNews">
-                <i class="fa-solid fa-flask object"></i> News
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
+                <i class="fa-solid fa-flask object"></i> Sviluppi
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
                   1
                 </span>
               </button>
             </div>
-            <a href="https://github.com/gabrielemartire/find_for_me/tree/main" target="_blank" style="color:black">
-                <i class="fa-brands fa-github" style="color: #43314e;"></i>
-            </a>
+            <div>
+                <a href="https://github.com/gabrielemartire" target="_blank" style="text-decoration: none;">
+                    <i class="fa-solid fa-bug" style="color: #43314e;"></i>
+                </a>
+                <a href="https://github.com/gabrielemartire/find_for_me/tree/main" target="_blank" style="color:black">
+                    <i class="fa-brands fa-github" style="color: #43314e;"></i>
+                </a>
+            </div>
         </div>
     </nav>
 
@@ -47,14 +52,14 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title">🔬PDF Keywords finder</h5>
+                    <h5 class="modal-title"><i class="fa-solid fa-file-pdf"></i> Importa PDF</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body mb-3">
                   <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="inserisci qui la parole chiave da cercare" ="3"></textarea>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-dark" id="openPDF" data-bs-dismiss="modal">📥Import PDF</button> 
+                    <button class="btn btn-dark" id="openPDF" data-bs-dismiss="modal"><i class="fa-solid fa-file-pdf"></i> Importa PDF</button> 
                     <input type="file" id="inputFile" hidden>
                 </div>
             </div>
@@ -66,35 +71,41 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="ModalNewsLabel">News</h1>
+            <h1 class="modal-title fs-5" id="ModalNewsLabel"><i class="fa-solid fa-flask object"></i> Sviluppi</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <ol class="list-group list-group-numbered">
-              <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                  set separator
-                </div>
-                <span class="badge text-bg-primary rounded-pill">🚧</span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                  Import PDF
-                </div>
-                <span class="badge text-bg-primary rounded-pill">📥</span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                  find KWs
-                </div>
-                <span class="badge text-bg-primary rounded-pill">🔑</span>
-              </li>
-              <li class="list-group-item d-flex justify-content-between align-items-start">
-                <div class="ms-2 me-auto">
-                  pick single pdf page
-                </div>
-                <span class="badge text-bg-primary rounded-pill">📄</span>
-              </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        Nuova ricerca senza nuovo import
+                    </div>
+                    <span class="badge text-bg-success rounded-pill"><i class="fa-solid fa-hourglass-end"></i></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        Dropdown per selezionare separatore
+                    </div>
+                    <span class="badge text-bg-warning rounded-pill"><i class="fa-regular fa-hourglass-half"></i></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        Export PDF
+                    </div>
+                    <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-hourglass-start"></i></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        Generatore di KWs
+                    </div>
+                    <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-hourglass-start"></i></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        Trova pagina PDF
+                    </div>
+                    <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-hourglass-start"></i></span>
+                </li>
             </ol>
           </div>
         </div>
@@ -104,10 +115,10 @@
     <main style="flex-direction: row; background-color: #43314e;">
         <div class="flex-container" style="flex-direction: column;">
             <canvas class="pdf-viewer hidden"></canvas>
-            <h3 class="main-page">importa un pdf con il tasto in alto</h3>
+            <h3 class="main-page">Importa un PDF con il tasto in alto e inizia la ricerca 🔬</h3>
             <div id="search-results"></div>
-            <button id="export-pdf-btn" class="hidden btn btn-dark mt-3">
-                <i class="fa-solid fa-file-export"></i>Export
+            <button id="export-pdf-btn" class="hidden btn btn-outline-dark mt-3">
+                <i class="fa-solid fa-file-export"></i> Export
             </button>
         </div>
     </main>
