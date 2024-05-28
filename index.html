@@ -13,7 +13,7 @@
     <!-- font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
     <!-- title -->
     <title>🔬PDF Keywords finder</title>
 </head>
@@ -55,13 +55,41 @@
                     <h5 class="modal-title"><i class="fa-solid fa-file-pdf"></i> Importa PDF</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <div class="modal-body mb-3">
-                  <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="inserisci qui la parole chiave da cercare" ="3"></textarea>
+                <div class="modal-body">
+                  <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">ParoleChiave</label>
+                    <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="inserisci qui la parole chiave da cercare"></textarea>
+                  </div>
+                  <div class="mb-3 ">
+
+                  </div>
+                  <div class="mb-3 g-3">
+                      <input type="checkbox" class="form-check-input" id="case-sensitive-search" /> 
+                      <label class="form-check-label" for="case-sensitive-search">Ricerca case sensitive</label>
+                  </div>
+                  <div class="mb-3 g-3">
+
+                  </div>
+                  <div class="row">
+                    <div class="col">
+                      <input type="checkbox" class="form-check-input" id="allow-Sdg-Gri">
+                      <label class="form-check-label" for="allow-Sdg-Gri">Ricerca per SDG/GRI</label>
+                    </div>
+
+                    <div class="col">
+                      <input type="number" class="form-control" id="page-to-start-search" placeholder="pagine per SDG/GRI" min="1" aria-describedby="pageToStartSearch">
+                    </div>
+                  </div>
+                    <div class="mb-3 g-3">
+                      <input type="checkbox" class="form-check-input" id="display-pages" /> 
+                      <label class="form-check-label" for="display-pages">Mostra lista delle pagine</label>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-dark" id="openPDF" data-bs-dismiss="modal"><i class="fa-solid fa-file-pdf"></i> Importa PDF</button> 
                     <input type="file" id="inputFile" hidden>
                 </div>
+                
             </div>
         </div>
     </div>
@@ -114,7 +142,7 @@
 
     <main style="flex-direction: row; background-color: #43314e;">
         <div class="flex-container" style="flex-direction: column;">
-            <canvas class="pdf-viewer hidden"></canvas>
+            <canvas class="pdf-viewer hidden" style="margin-top: 15px;"></canvas>
             <h3 class="main-page">Importa un PDF con il tasto in alto e inizia la ricerca 🔬</h3>
             <div id="search-results"></div>
             <button id="export-pdf-btn" class="hidden btn btn-outline-dark mt-3">

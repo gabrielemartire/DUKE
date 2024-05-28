@@ -5,8 +5,13 @@ const currentPage = document.getElementById('current_page');
 const viewer = document.querySelector('.pdf-viewer');
 const searchResults = document.getElementById('search-results');
 const searchAgainButton = document.getElementById('search-again');
+const pageToStartSearch = document.getElementById('page-to-start-search');
+const caseSensitiveSearchCheckbox = document.getElementById('case-sensitive-search');
+const displayPagesCheckbox = document.getElementById('display-pages');
+
 let currentPDF = {};
 let wordsToSearch = [];
+let startPage = 1;
 
 function resetCurrentPDF() {
     currentPDF = {
@@ -21,6 +26,7 @@ function resetCurrentPDF() {
 openFile.addEventListener('click', () => {
     const keywordsInput = document.getElementById('exampleFormControlTextarea1').value;
     wordsToSearch = keywordsInput.split(',').map(keyword => keyword.trim());
+    startPage = parseInt(pageToStartSearch.value) || 1;
     input.click();
 });
 
@@ -34,7 +40,7 @@ input.addEventListener('change', event => {
             zoomButton.disabled = false;
         }
     } else {
-        alert("Il file che stai cercando di aprire non è un file PDF!")
+        alert("Il file che stai cercando di aprire non è un file PDF!");
     }
 });
 
@@ -53,7 +59,7 @@ function loadPDF(data) {
 
 function processAllPages() {
     let pagePromises = [];
-    for (let i = 1; i <= currentPDF.countOfPages; i++) {
+    for (let i = startPage; i <= currentPDF.countOfPages; i++) {
         pagePromises.push(currentPDF.file.getPage(i).then(processPage));
     }
     Promise.all(pagePromises).then(() => {
@@ -68,14 +74,17 @@ function processPage(page) {
         }).join(' ');
 
         wordsToSearch.forEach((word) => {
-            var regex = new RegExp(word, 'gi');
+            var regexFlags = caseSensitiveSearchCheckbox.checked ? 'g' : 'gi';
+            var regexPattern = `\\b${word}\\b`; // only whole Word Search
+            var regex = new RegExp(regexPattern, regexFlags);
             var matches = pageText.match(regex);
             if (matches) {
                 let foundElement = currentPDF.foundElements.find(element => element.word === word);
                 if (foundElement) {
                     foundElement.count += matches.length;
+                    foundElement.pages.push(page.pageNumber);
                 } else {
-                    currentPDF.foundElements.push({ word, count: matches.length });
+                    currentPDF.foundElements.push({ word, count: matches.length, pages: [page.pageNumber] });
                 }
             }
         });
@@ -85,7 +94,11 @@ function processPage(page) {
 function displaySearchResults() {
     let resultsHTML = '<ul class="list-group">';
     currentPDF.foundElements.forEach((element) => {
-        resultsHTML += `<li class="list-group-item">${element.word}: ${element.count}</li>`;
+        resultsHTML += `<li class="list-group-item">${element.word}: ${element.count}`;
+        if (displayPagesCheckbox.checked) {
+            resultsHTML += `<br>Pagine: ${element.pages.join(', ')}`;
+        }
+        resultsHTML += `</li>`;
     });
     resultsHTML += '</ul>';
     searchResults.innerHTML = resultsHTML;
@@ -97,6 +110,7 @@ function displaySearchResults() {
         if (keywordsInput) {
             wordsToSearch = keywordsInput.split(',').map(keyword => keyword.trim());
             currentPDF.foundElements = [];
+            startPage = parseInt(prompt('Inserisci il numero della pagina da cui iniziare la ricerca:', '1')) || 1;
             processAllPages();
         }
     });
