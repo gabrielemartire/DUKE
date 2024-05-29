@@ -13,6 +13,7 @@ const displaySdgGriClm = document.getElementById('allow-Sdg-Gri');
 let currentPDF = {};
 let wordsToSearch = [];
 let startPage = 1;
+let pdfImportedStatus = false
 
 const sdgMapping = {
     "2-7": [" SDG 8", " SDG 10"],
@@ -147,7 +148,10 @@ function loadPDF(data) {
         currentPDF.countOfPages = doc.numPages;
         viewer.classList.remove('hidden');
         document.querySelector('main h3').classList.add("hidden");
-        document.getElementById('export-pdf-btn').classList.remove("hidden");
+        const exportPdfBtn = document.getElementById('export-pdf-btn')
+        exportPdfBtn.classList.remove("hidden");
+        exportPdfBtn.classList.add("navbar-collapse-btn");
+        document.getElementById('navbar-collapse-btn').classList.add("navbar-collapse-btn");
         processAllPages();
     });
 }
@@ -214,18 +218,18 @@ function displaySearchResults() {
 
     resultsHTML += '</tbody></table>';
     searchResults.innerHTML = resultsHTML;
-    searchResults.innerHTML += '<button id="search-again" class="btn btn-dark mt-3"><i class="fa-solid fa-repeat"></i> Cerca di nuovo sullo stesso PDF</button>';
+    //searchResults.innerHTML += '<button id="search-again" class="btn btn-dark mt-3"><i class="fa-solid fa-repeat"></i> Cerca di nuovo sullo stesso PDF</button>';
     renderCurrentPage();
 
-    document.getElementById('search-again').addEventListener('click', () => {
-        const keywordsInput = prompt('Inserisci nuove parole chiave separate da virgola:');
-        if (keywordsInput) {
-            wordsToSearch = keywordsInput.split(',').map(keyword => keyword.trim());
-            currentPDF.foundElements = [];
-            startPage = parseInt(prompt('Inserisci il numero della pagina da cui iniziare la ricerca:', '1')) || 1;
-            processAllPages();
-        }
-    });
+    //ocument.getElementById('search-again').addEventListener('click', () => {
+    //   const keywordsInput = prompt('Inserisci nuove parole chiave separate da virgola:');
+    //   if (keywordsInput) {
+    //       wordsToSearch = keywordsInput.split(',').map(keyword => keyword.trim());
+    //       currentPDF.foundElements = [];
+    //       startPage = parseInt(prompt('Inserisci il numero della pagina da cui iniziare la ricerca:', '1')) || 1;
+    //       processAllPages();
+    //   }
+    //);
 }
 
 
