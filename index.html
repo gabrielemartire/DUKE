@@ -57,34 +57,35 @@
                 </div>
                 <div class="modal-body">
                   <div class="mb-3">
-                    <label for="exampleFormControlTextarea1" class="form-label">ParoleChiave</label>
-                    <textarea class="form-control" id="exampleFormControlTextarea1" placeholder="inserisci qui la parole chiave da cercare"></textarea>
+                    <label for="keywords-text-area" class="form-label">ParoleChiave</label>
+                    <textarea class="form-control" id="keywords-text-area" placeholder="inserisci qui la parole chiave da cercare"></textarea>
                   </div>
                   <div class="mb-3 ">
 
                   </div>
                   <div class="mb-3 g-3">
-                      <input type="checkbox" class="form-check-input" id="case-sensitive-search" /> 
+                      <input type="checkbox" class="form-check-input" id="case-sensitive-search" checked /> 
                       <label class="form-check-label" for="case-sensitive-search">Ricerca case sensitive</label>
                   </div>
-                  <div class="mb-3 g-3">
 
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="RadioBtnTypology" id="display-pages" checked>
+                    <label class="form-check-label" for="display-pages">
+                      Mostra lista delle pagine
+                    </label>
                   </div>
-                  <div class="row">
-                    <div class="col">
-                      <input type="checkbox" class="form-check-input" id="allow-Sdg-Gri">
-                      <label class="form-check-label" for="allow-Sdg-Gri">Ricerca per SDG/GRI</label>
-                    </div>
+                  <div class="form-check">
+                    <input class="form-check-input" type="radio" name="RadioBtnTypology" id="allow-Sdg-Gri">
+                    <label class="form-check-label" for="allow-Sdg-Gri">
+                      Ricerca per SDG/GRI
+                    </label>
+                  </div>
 
-                    <div class="col">
-                      <input type="number" class="form-control" id="page-to-start-search" placeholder="pagine per SDG/GRI" min="1" aria-describedby="pageToStartSearch">
-                    </div>
+                  <div class="form-check">
+                    <input type="number" class="form-control" id="page-to-start-search" placeholder="pagina tabelle SDG" min="1" aria-describedby="pageToStartSearch">
                   </div>
-                    <div class="mb-3 g-3">
-                      <input type="checkbox" class="form-check-input" id="display-pages" /> 
-                      <label class="form-check-label" for="display-pages">Mostra lista delle pagine</label>
-                    </div>
-                </div>
+
+                </div> <!-- close modal-body -->
                 <div class="modal-footer">
                     <button class="btn btn-dark" id="openPDF" data-bs-dismiss="modal"><i class="fa-solid fa-file-pdf"></i> Importa PDF</button> 
                     <input type="file" id="inputFile" hidden>
@@ -141,10 +142,10 @@
     </div>
 
     <main style="flex-direction: row; background-color: #43314e;">
-        <div class="flex-container" style="flex-direction: column;">
+        <div class="flex-container" style="flex-direction: column; margin: 7%">
             <canvas class="pdf-viewer hidden" style="margin-top: 15px;"></canvas>
             <h3 class="main-page">Importa un PDF con il tasto in alto e inizia la ricerca 🔬</h3>
-            <div id="search-results"></div>
+            <div id="search-results" style="margin: 40px 0px;"></div>
             <button id="export-pdf-btn" class="hidden btn btn-outline-dark mt-3">
                 <i class="fa-solid fa-file-export"></i> Export
             </button>
