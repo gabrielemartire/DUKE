@@ -19,32 +19,38 @@
 </head>
 
 <body>
-
-    <nav class="navbar bg-body-tertiary">
-        <div class="container-fluid">
-            <div>
-              <a class="navbar-brand" href="#" style="color: #43314e;">
-                  🔬PDF Keywords finder
-              </a>
-              <button id="btn-import-pdf" type="button" class="btn btn-dark btn-lg" data-bs-toggle="modal" data-bs-target="#ModalImprot">
-                  <i class="fa-solid fa-file-pdf"></i> Importa PDF
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+      <div class="container-fluid justify-content-start">
+        <a class="navbar-brand" href="#">🔬PDF Keywords finder</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <button id="btn-import-pdf" type="button"class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#ModalImprot">
+                <i class="fa-solid fa-file-pdf pdf-icon" style="color: #8C0303;"></i> Importa PDF
               </button>
-              <button type="button" class="btn btn-outline-dark btn-md position-relative" data-bs-toggle="modal" data-bs-target="#ModalNews">
-                <i class="fa-solid fa-flask object"></i> Sviluppi
+            </li>
+            <li class="nav-item">
+              <button type="button" class="btn btn-outline-dark position-relative" data-bs-toggle="modal" data-bs-target="#ModalNews">
+                <i class="fa-solid fa-flask news-icon" style="color: #198754;"></i> Sviluppi
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
-                  1
+                  4
                 </span>
               </button>
-            </div>
-            <div>
-                <a href="https://github.com/gabrielemartire" target="_blank" style="text-decoration: none;">
-                    <i class="fa-solid fa-bug" style="color: #43314e;"></i>
-                </a>
-                <a href="https://github.com/gabrielemartire/find_for_me/tree/main" target="_blank" style="color:black">
-                    <i class="fa-brands fa-github" style="color: #43314e;"></i>
-                </a>
-            </div>
+            </li>
+          </ul>
+          <div>
+            <a href="https://github.com/gabrielemartire" target="_blank" style="text-decoration: none;">
+              <button type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-bug bug-icon" style="color: #43314e;"></i></button>
+            </a>
+            <a href="https://github.com/gabrielemartire/find_for_me/tree/main" target="_blank" style="color:black">
+              <button type="button" class="btn btn-outline-secondary"><i class="fa-brands fa-github" style="color: #43314e;"></i></button>
+            </a>
         </div>
+        </div>
+      </div>
     </nav>
 
     <!-- Modal Import -->
@@ -112,6 +118,30 @@
                     <span class="badge text-bg-success rounded-pill"><i class="fa-solid fa-hourglass-end"></i></span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <div class="ms-2 me-auto">
+                      Scelta case sensitive si/no
+                  </div>
+                  <span class="badge text-bg-success rounded-pill"><i class="fa-solid fa-hourglass-end"></i></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <div class="ms-2 me-auto">
+                      colonna pagina pdf della KW trovata
+                  </div>
+                  <span class="badge text-bg-success rounded-pill"><i class="fa-solid fa-hourglass-end"></i></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <div class="ms-2 me-auto">
+                      Associazione Disclosure / GRI
+                  </div>
+                  <span class="badge text-bg-success rounded-pill"><i class="fa-solid fa-hourglass-end"></i></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <div class="ms-2 me-auto">
+                      Avvio ricerca da pagina specifica (nota: inserire la pagina da dove sono presenti le tabelle GRI)
+                  </div>
+                  <span class="badge text-bg-success rounded-pill"><i class="fa-solid fa-hourglass-end"></i></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
                         Dropdown per selezionare separatore
                     </div>
@@ -143,12 +173,12 @@
 
     <main style="flex-direction: row; background-color: #43314e;">
         <div class="flex-container" style="flex-direction: column; margin: 7%">
-            <canvas class="pdf-viewer hidden" style="margin-top: 15px;"></canvas>
-            <h3 class="main-page">Importa un PDF con il tasto in alto e inizia la ricerca 🔬</h3>
-            <div id="search-results" style="margin: 40px 0px;"></div>
-            <button id="export-pdf-btn" class="hidden btn btn-outline-dark mt-3">
-                <i class="fa-solid fa-file-export"></i> Export
-            </button>
+          <h3 class="main-page">Importa un PDF con il tasto in alto e inizia la ricerca 🔬</h3>
+          <div id="search-results" style="margin: 40px 0px;"></div>
+          <button id="export-pdf-btn" class="hidden btn btn-outline-dark mt-3">
+            <i class="fa-solid fa-file-export"></i> Export
+          </button>
+          <canvas class="pdf-viewer hidden" style="margin-top: 15px;"></canvas>
         </div>
     </main>
 

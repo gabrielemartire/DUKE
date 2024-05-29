@@ -56,23 +56,50 @@ li{
 
 .btn{
 	margin-right: 10px;
+	margin-top: 10px;
 }
 
 
 
-.object {
+.news-icon {
 	/* fain modo che l'oggetto sia animato e si inclini di poco per poi tornare dritto*/
-	animation: tilt 7s infinite;
+	animation: tilt 2s infinite;
   }
   
   @keyframes tilt {
 	0% {
-		color: black;
 	}
-	30% {
+	20% {
 		transform: rotate(11deg);
-		color: rgb(63, 36, 27);
 	}
-	40% {
+	35% {
+		transform: rotate(-11deg);
 	}
+	50% {
+		transform: rotate(11deg);
+	}
+	65% {
+		transform: rotate(-11deg);
+	}
+	80% {
+		transform: rotate(11deg);
+	}
+
 }
+
+
+
+/* 360 animation
+.some-icon {
+    transform-style: preserve-3d;
+    animation: rotateY 1s linear infinite;
+}
+@keyframes rotateY {
+    0% {
+        transform: rotateY(0deg);
+    }
+	100% {
+        transform: rotateY(360deg);
+    }
+}
+*/
