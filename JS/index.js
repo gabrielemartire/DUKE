@@ -1,4 +1,3 @@
-const zoomButton = document.getElementById('zoom');
 const input = document.getElementById('inputFile');
 const openFile = document.getElementById('openPDF');
 const currentPage = document.getElementById('current_page');
@@ -114,7 +113,7 @@ function resetCurrentPDF() {
         file: null,
         countOfPages: 0,
         currentPage: 1,
-        zoom: 0.5,
+        zoom: 1.2,
         foundElements: []
     }
 }
@@ -148,10 +147,9 @@ function loadPDF(data) {
         currentPDF.countOfPages = doc.numPages;
         viewer.classList.remove('hidden');
         document.querySelector('main h3').classList.add("hidden");
-        const exportPdfBtn = document.getElementById('export-pdf-btn')
-        exportPdfBtn.classList.remove("hidden");
-        exportPdfBtn.classList.add("navbar-collapse-btn");
-        document.getElementById('navbar-collapse-btn').classList.add("navbar-collapse-btn");
+        const toolPdfBtnsDiv = document.getElementById('tool-pdf-btns-div')
+        toolPdfBtnsDiv.classList.remove("hidden");
+        document.getElementById('navbar-collapse-btn').classList.add("navbar-collapse-animation");
         processAllPages();
     });
 }
@@ -210,7 +208,15 @@ function displaySearchResults() {
     currentPDF.foundElements.forEach((element) => {
         resultsHTML += `<tr><td>${element.word}</td><td>${element.count}</td>`;
         if (displayPagesCheckbox.checked) {
-            resultsHTML += `<td>${element.pages.join(', ')}</td>`;
+            // resultsHTML += `<td>${element.pages.join(', ')}</td>`;
+            // creare un pulsante per ogni pagina
+            console.log(element.pages)
+            resultsHTML += `<td>`;
+            element.pages.sort().forEach(page => {
+                console.log(page)
+                resultsHTML += `<button id="page-${page}" class="btn btn-outline-secondary" style="margin: 2px;">${page}</button>`;
+            });
+            resultsHTML += `</td>`;
         }
         console.log(displaySdgGriClm.checked)
         if (displaySdgGriClm.checked) { resultsHTML += `<td>${element.sdg}</td></tr>` } else {}
@@ -250,3 +256,28 @@ function renderCurrentPage() {
         currentPage.innerHTML = currentPDF.currentPage + ' of ' + currentPDF.countOfPages;
     });
 }
+
+//andare alla pagina relativa al pulsante premuto
+document.getElementById('search-results').addEventListener('click', (event) => {
+    if (event.target.tagName === 'BUTTON') {
+        currentPDF.currentPage = parseInt(event.target.textContent);
+        renderCurrentPage();
+    }
+});
+
+
+document.getElementById('next').addEventListener('click', () => {
+	const isValidPage = currentPDF.currentPage < currentPDF.countOfPages;
+	if (isValidPage) {
+		currentPDF.currentPage += 1;
+		renderCurrentPage();
+	}
+});
+
+document.getElementById('prev').addEventListener('click', () => {
+	const isValidPage = currentPDF.currentPage < currentPDF.countOfPages;
+	if (isValidPage) {
+		currentPDF.currentPage -= 1;
+		renderCurrentPage();
+	}
+});

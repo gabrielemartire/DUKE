@@ -19,39 +19,47 @@
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary navbar">
       <div class="container-fluid justify-content-start">
         <a class="navbar-brand" href="#">🔬PDF Keywords finder</a>
-        <button id="navbar-collapse-btn" class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button id="navbar-collapse-btn" class="btn navbar-toggler" onclick="this.blur();" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <button id="btn-import-pdf" type="button"class="btn btn-outline-dark" data-bs-toggle="modal" data-bs-target="#ModalImprot">
+              <button id="btn-import-pdf" type="button" class="btn nav-btns btn-outline-dark" data-bs-toggle="modal" data-bs-target="#ModalImprot">
                 <i class="fa-solid fa-file-pdf pdf-icon" style="color: #8C0303;"></i> Importa PDF
               </button>
             </li>
             <li class="nav-item">
-              <button type="button" class="btn btn-outline-dark position-relative" data-bs-toggle="modal" data-bs-target="#ModalNews">
+              <button type="button" class="btn btn-outline-dark nav-btns position-relative" data-bs-toggle="modal" data-bs-target="#ModalNews">
                 <i class="fa-solid fa-flask news-icon" style="color: #198754;"></i> Sviluppi
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
                   5
                 </span>
               </button>
             </li>
-            <li class="nav-item">
-              <button id="export-pdf-btn" class="hidden btn btn-outline-dark">
-                <i class="fa-solid fa-file-export"></i> Export this result
-              </button>
+            <li class="nav-item"></li>
+              <div id="tool-pdf-btns-div" class="btn-group me-2 nav-btns hidden" role="group" aria-label="First group">  
+                <button type="button" class="btn btn-outline-secondary" disabled>
+                    <i class="fa-solid fa-file-pdf pdf-icon navbar-collapse-animation"></i>
+                </button>
+                <button class="btn btn-outline-secondary">
+                    <i class="fa-solid fa-file-export"></i> Export this result
+                </button>
+                <button id="prev" type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-angle-left"></i></button>
+                <button id="next" type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-angle-right"></i></button>
+                <button type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-repeat"></i></button>
+              </div>
             </li>
           </ul>
           <div>
             <a href="https://github.com/gabrielemartire" target="_blank" style="text-decoration: none;">
-              <button type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-bug bug-icon" style="color: #43314e;"></i></button>
+              <button type="button" class="btn btn-outline-secondary nav-btns"><i class="fa-solid fa-bug bug-icon" style="color: #43314e;"></i></button>
             </a>
             <a href="https://github.com/gabrielemartire/find_for_me/tree/main" target="_blank" style="color:black">
-              <button type="button" class="btn btn-outline-secondary"><i class="fa-brands fa-github" style="color: #43314e;"></i></button>
+              <button type="button" class="btn btn-outline-secondary nav-btns"><i class="fa-brands fa-github" style="color: #43314e;"></i></button>
             </a>
         </div>
         </div>
@@ -176,8 +184,8 @@
       </div>
     </div>
 
-    <main style="flex-direction: row; background-color: #43314e;">
-        <div class="flex-container" style="flex-direction: column; margin: 7%">
+    <main style="flex-direction: row;">
+        <div class="container flex-container" style="flex-direction: column; margin-top: 11%">
           <h3 class="main-page">Importa un PDF con il tasto in alto e inizia la ricerca 🔬</h3>
           <canvas class="pdf-viewer hidden" style="margin-top: 15px;"></canvas>
           <div id="search-results" style="margin: 40px 0px;"></div>

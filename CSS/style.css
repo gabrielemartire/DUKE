@@ -1,17 +1,11 @@
 *{
-	padding: 0;
-	margin:0;
-	box-sizing: border-box;
 	font-family: "Noto Sans Display", sans-serif;
 }
 
-body{
-	font-family: 'Lato', sans-serif;
+body, main{
+	background-color: #43314e;
 }
 
-brand-color {
-	color: #f1faee;
-}
 main{
 	width: 100%;
 	min-height: 90vh; 
@@ -34,6 +28,11 @@ li{
 	display:none !important;
 }
 
+.nav-btns {
+	margin-top: 10px;
+	margin-left: 10px;
+}
+
 .pagination{
 	position: absolute;
 	left: 50%;
@@ -49,19 +48,7 @@ li{
 }
 
 
-.main-page{
-	color: #f1faee;
-	margin: auto;
-}
-
-.btn{
-	margin-right: 10px;
-	margin-top: 10px;
-}
-
-
-
-.news-icon {
+.news-icon:hover {
 	/* fain modo che l'oggetto sia animato e si inclini di poco per poi tornare dritto*/
 	animation: tilt 2s infinite;
   }
@@ -70,49 +57,48 @@ li{
 	0% {
 	}
 	20% {
-		transform: rotate(3deg);
+		transform: rotate(20deg);
 	}
 	35% {
-		transform: rotate(-3deg);
+		transform: rotate(-20deg);
 	}
 	50% {
-		transform: rotate(3deg);
+		transform: rotate(20deg);
 	}
 	65% {
-		transform: rotate(-3deg);
+		transform: rotate(-20deg);
 	}
 	80% {
-		transform: rotate(3deg);
+		transform: rotate(20deg);
 	}
 
 }
 
 /* 360 animation */
-.navbar-collapse-btn {
+.navbar-collapse-animation {
     animation: rotate 1s linear infinite !important;
-	background-color: #a10707;
 }
 @keyframes rotate {
     0% {
         transform: rotate(0deg);
     }
 	5% {
-        transform: rotate(4deg);
+        transform: rotate(10deg);
     }
 	10% {
         transform: rotate(0deg);
     }
 	15% {
-        transform: rotate(-4deg);
+        transform: rotate(-10deg);
     }
 	20% {
-        transform: rotate(4deg);
+        transform: rotate(10deg);
     }
 	25% {
         transform: rotate(0deg);
     }
 	30% {
-        transform: rotate(-4deg);
+        transform: rotate(-10deg);
     }
 	40% {
         transform: rotate(0deg);
