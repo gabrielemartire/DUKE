@@ -214,8 +214,8 @@ function displaySearchResults() {
             resultsHTML += `<td>`;
             element.pages.sort().forEach(page => {
                 console.log(page)
-                resultsHTML += `<button id="page-${page}" class="btn btn-outline-secondary" style="margin: 2px;">${page}</button>`;
-            });
+                resultsHTML += `<a type="button" id="page-${page}" href="#scrollspyHeading4" class="btn btn-outline-secondary" style="margin: 2px;">${page}</a>`;
+            }); 
             resultsHTML += `</td>`;
         }
         console.log(displaySdgGriClm.checked)
@@ -227,7 +227,7 @@ function displaySearchResults() {
     //searchResults.innerHTML += '<button id="search-again" class="btn btn-dark mt-3"><i class="fa-solid fa-repeat"></i> Cerca di nuovo sullo stesso PDF</button>';
     renderCurrentPage();
 
-    //ocument.getElementById('search-again').addEventListener('click', () => {
+    //document.getElementById('search-again').addEventListener('click', () => {
     //   const keywordsInput = prompt('Inserisci nuove parole chiave separate da virgola:');
     //   if (keywordsInput) {
     //       wordsToSearch = keywordsInput.split(',').map(keyword => keyword.trim());
@@ -259,17 +259,16 @@ function renderCurrentPage() {
 
 //andare alla pagina relativa al pulsante premuto
 document.getElementById('search-results').addEventListener('click', (event) => {
-    if (event.target.tagName === 'BUTTON') {
+    if (event.target.tagName === 'A') {
         currentPDF.currentPage = parseInt(event.target.textContent);
         renderCurrentPage();
     }
 });
 
-
 document.getElementById('next').addEventListener('click', () => {
 	const isValidPage = currentPDF.currentPage < currentPDF.countOfPages;
 	if (isValidPage) {
-		currentPDF.currentPage += 1;
+        currentPDF.currentPage += 1;
 		renderCurrentPage();
 	}
 });

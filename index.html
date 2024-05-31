@@ -36,21 +36,21 @@
               <button type="button" class="btn btn-outline-dark nav-btns position-relative" data-bs-toggle="modal" data-bs-target="#ModalNews">
                 <i class="fa-solid fa-flask news-icon" style="color: #198754;"></i> Sviluppi
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
-                  5
+                  6
                 </span>
               </button>
             </li>
             <li class="nav-item"></li>
               <div id="tool-pdf-btns-div" class="btn-group me-2 nav-btns hidden" role="group" aria-label="First group">  
-                <button type="button" class="btn btn-outline-secondary" disabled>
+                <a type="button" class="btn btn-outline-secondary" href="#scrollspyHeading4">
                     <i class="fa-solid fa-file-pdf pdf-icon navbar-collapse-animation"></i>
-                </button>
-                <button class="btn btn-outline-secondary">
+                </a>
+                <button class="btn btn-outline-secondary" disabled>
                     <i class="fa-solid fa-file-export"></i> Export this result
                 </button>
                 <button id="prev" type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-angle-left"></i></button>
                 <button id="next" type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-angle-right"></i></button>
-                <button type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-repeat"></i></button>
+                <button type="button" class="btn btn-outline-secondary" disabled><i class="fa-solid fa-repeat"></i></button>
               </div>
             </li>
           </ul>
@@ -58,8 +58,11 @@
             <a href="https://github.com/gabrielemartire" target="_blank" style="text-decoration: none;">
               <button type="button" class="btn btn-outline-secondary nav-btns"><i class="fa-solid fa-bug bug-icon" style="color: #43314e;"></i></button>
             </a>
-            <a href="https://github.com/gabrielemartire/find_for_me/tree/main" target="_blank" style="color:black">
+            <a href="https://github.com/gabrielemartire/find_for_me/tree/main" target="_blank" style="text-decoration: none;">
               <button type="button" class="btn btn-outline-secondary nav-btns"><i class="fa-brands fa-github" style="color: #43314e;"></i></button>
+            </a>
+            <a href="#" target="_blank" style="text-decoration: none;">
+              <button type="button" class="btn btn-outline-secondary nav-btns" disabled><i class="fa-solid fa-broom-ball" style="color: #43314e;"></i></button>
             </a>
         </div>
         </div>
@@ -87,17 +90,14 @@
                       <label class="form-check-label" for="case-sensitive-search">Ricerca case sensitive</label>
                   </div>
 
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="RadioBtnTypology" id="display-pages" checked>
-                    <label class="form-check-label" for="display-pages">
-                      Mostra lista delle pagine
-                    </label>
+                  <div class="mb-3 g-3">
+                    <input type="checkbox" class="form-check-input" id="allow-Sdg-Gri" /> 
+                    <label class="form-check-label" for="allow-Sdg-Gri">Ricerca per SDG/GRI</label>
                   </div>
-                  <div class="form-check">
-                    <input class="form-check-input" type="radio" name="RadioBtnTypology" id="allow-Sdg-Gri">
-                    <label class="form-check-label" for="allow-Sdg-Gri">
-                      Ricerca per SDG/GRI
-                    </label>
+
+                  <div class="mb-3 g-3">
+                    <input type="checkbox" class="form-check-input" id="display-pages" checked /> 
+                    <label class="form-check-label" for="display-pages">Mostra lista delle pagine</label>
                   </div>
 
                   <div class="form-check">
@@ -155,10 +155,22 @@
                   <span class="badge text-bg-success rounded-pill"><i class="fa-solid fa-hourglass-end"></i></span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <div class="ms-2 me-auto">
+                      Link diretta alla pagina con KW trovata 
+                  </div>
+                  <span class="badge text-bg-success rounded-pill"><i class="fa-solid fa-hourglass-end"></i></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
-                        Dropdown per selezionare separatore
+                        Zoom PDF
                     </div>
                     <span class="badge text-bg-warning rounded-pill"><i class="fa-regular fa-hourglass-half"></i></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <div class="ms-2 me-auto">
+                    Dropdown per selezionare separatore
+                  </div>
+                  <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-hourglass-start"></i></span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
@@ -187,7 +199,7 @@
     <main style="flex-direction: row;">
         <div class="container flex-container" style="flex-direction: column; margin-top: 11%">
           <h3 class="main-page">Importa un PDF con il tasto in alto e inizia la ricerca 🔬</h3>
-          <canvas class="pdf-viewer hidden" style="margin-top: 15px;"></canvas>
+          <canvas class="pdf-viewer hidden" style="margin-top: 15px;" id="scrollspyHeading4"></canvas>
           <div id="search-results" style="margin: 40px 0px;"></div>
         </div>
     </main>
