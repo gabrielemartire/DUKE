@@ -104,3 +104,17 @@ li{
         transform: rotate(0deg);
     }
 }
+
+
+/*zoom */
+.pdf-zoom-viewer {
+    position: absolute;
+    border: 1px solid black;
+    display: none;
+    z-index: 1000;
+}
+
+#canvas {
+    border: 1px solid black;
+    cursor: crosshair;
+}

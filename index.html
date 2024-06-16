@@ -35,8 +35,8 @@
             <li class="nav-item">
               <button type="button" class="btn btn-outline-dark nav-btns position-relative" data-bs-toggle="modal" data-bs-target="#ModalNews">
                 <i class="fa-solid fa-flask news-icon" style="color: #198754;"></i> Sviluppi
-                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-warning">
-                  2
+                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                  1
                 </span>
               </button>
             </li>
@@ -91,17 +91,19 @@
                   </div>
 
                   <div class="mb-3 g-3">
-                    <input type="checkbox" class="form-check-input" id="allow-Sdg-Gri" /> 
-                    <label class="form-check-label" for="allow-Sdg-Gri">Ricerca per SDG/GRI</label>
+                    <input type="checkbox" class="form-check-input" id="btns-pages" checked /> 
+                    <label class="form-check-label" for="display-pages">Mostra pagine come bottoni</label>
                   </div>
 
-                  <div class="mb-3 g-3">
-                    <input type="checkbox" class="form-check-input" id="display-pages" checked /> 
-                    <label class="form-check-label" for="display-pages">Mostra lista delle pagine</label>
-                  </div>
 
-                  <div class="form-check">
-                    <input type="number" class="form-control" id="page-to-start-search" placeholder="pagina tabelle SDG" min="1" aria-describedby="pageToStartSearch">
+                  <div class="row align-items-center mb-3 g-3">
+                    <div class="col-auto">
+                      <input type="checkbox" class="form-check-input" id="allow-Sdg-Gri" /> 
+                      <label class="form-check-label" for="allow-Sdg-Gri">Ricerca per SDG/GRI</label>
+                    </div>
+                    <div class="col-auto">
+                      <input type="number" class="form-control" id="page-to-start-search" placeholder="pagina tabelle SDG" min="1" aria-describedby="pageToStartSearch">
+                    </div>
                   </div>
 
                 </div> <!-- close modal-body -->
@@ -128,37 +130,43 @@
                     <div class="ms-2 me-auto">
                         Nuova ricerca senza nuovo import
                     </div>
-                    <span class="badge text-bg-success rounded-pill"><i class="fa-solid fa-hourglass-end"></i></span>
+                    <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-check"></i></span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                   <div class="ms-2 me-auto">
                       Scelta case sensitive si/no
                   </div>
-                  <span class="badge text-bg-success rounded-pill"><i class="fa-solid fa-hourglass-end"></i></span>
+                  <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-check"></i></span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                   <div class="ms-2 me-auto">
                       colonna pagina pdf della KW trovata
                   </div>
-                  <span class="badge text-bg-success rounded-pill"><i class="fa-solid fa-hourglass-end"></i></span>
+                  <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-check"></i></span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                   <div class="ms-2 me-auto">
                       Associazione Disclosure / GRI
                   </div>
-                  <span class="badge text-bg-success rounded-pill"><i class="fa-solid fa-hourglass-end"></i></span>
+                  <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-check"></i></span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                   <div class="ms-2 me-auto">
                       Avvio ricerca da pagina specifica (nota: inserire la pagina da dove sono presenti le tabelle GRI)
                   </div>
-                  <span class="badge text-bg-success rounded-pill"><i class="fa-solid fa-hourglass-end"></i></span>
+                  <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-check"></i></span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                   <div class="ms-2 me-auto">
                       Link diretta alla pagina con KW trovata 
                   </div>
-                  <span class="badge text-bg-success rounded-pill"><i class="fa-solid fa-hourglass-end"></i></span>
+                  <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-check"></i></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <div class="ms-2 me-auto">
+                      Zoom Relativo rispetto al mouse 
+                  </div>
+                  <span class="badge text-bg-success rounded-pill">NEW <i class="fa-solid fa-rocket"></i></span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                   <div class="ms-2 me-auto">
@@ -174,33 +182,33 @@
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                   <div class="ms-2 me-auto">
+                      Export result
+                  </div>
+                  <span class="badge text-bg-warning rounded-pill"><i class="fa-regular fa-hourglass-half"></i></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <div class="ms-2 me-auto">
+                      New search with safe PDF
+                  </div>
+                  <span class="badge text-bg-warning rounded-pill"><i class="fa-regular fa-hourglass-half"></i></span>
+                </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                  <div class="ms-2 me-auto">
                     Zoom PDF
                   </div>
-                  <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-hourglass-start"></i></span>
+                  <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-xmark"></i></span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                   <div class="ms-2 me-auto">
                     Dropdown per selezionare separatore
                   </div>
-                  <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-hourglass-start"></i></span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                        Export PDF
-                    </div>
-                    <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-hourglass-start"></i></span>
+                  <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-xmark"></i></span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
                         Generatore di KWs
                     </div>
-                    <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-hourglass-start"></i></span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                        Trova pagina PDF
-                    </div>
-                    <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-hourglass-start"></i></span>
+                    <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-xmark"></i></span>
                 </li>
             </ol>
           </div>
@@ -211,11 +219,10 @@
     <main style="flex-direction: row;">
         <div class="container flex-container" style="flex-direction: column; margin-top: 11%">
           <h3 class="main-page">Importa un PDF con il tasto in alto e inizia la ricerca 🔬</h3>
-          <canvas class="pdf-viewer hidden" style="margin-top: 15px;" id="scrollspyHeading4"></canvas>
+          <canvas id="canvas" class="pdf-viewer hidden" style="margin-top: 15px;" onmousemove="zoom(event)"></canvas>
           <div id="search-results" style="margin: 40px 0px;"></div>
         </div>
     </main>
-
     <script type="text/javascript" src="JS/index.js"></script>
 </body>
 

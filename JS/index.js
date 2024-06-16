@@ -1,18 +1,21 @@
 const input = document.getElementById('inputFile');
 const openFile = document.getElementById('openPDF');
 const currentPage = document.getElementById('current_page');
-const viewer = document.querySelector('.pdf-viewer');
+const viewer = document.getElementById('canvas');
+const zoomCanvas = document.createElement('canvas');
+const zoomContext = zoomCanvas.getContext('2d');
+document.body.appendChild(zoomCanvas);
 const searchResults = document.getElementById('search-results');
 const searchAgainButton = document.getElementById('search-again');
 const pageToStartSearch = document.getElementById('page-to-start-search');
 const caseSensitiveSearchCheckbox = document.getElementById('case-sensitive-search');
-const displayPagesCheckbox = document.getElementById('display-pages');
+const displayPagesBtns = document.getElementById('btns-pages');
 const displaySdgGriClm = document.getElementById('allow-Sdg-Gri');
 
 let currentPDF = {};
 let wordsToSearch = [];
 let startPage = 1;
-let pdfImportedStatus = false
+let pdfImportedStatus = false;
 
 const sdgMapping = {
     "2-7": [" SDG 8", " SDG 10"],
@@ -107,7 +110,6 @@ const sdgMapping = {
     "419-1": [" SDG 16"]
 }
 
-
 function resetCurrentPDF() {
     currentPDF = {
         file: null,
@@ -115,7 +117,7 @@ function resetCurrentPDF() {
         currentPage: 1,
         zoom: 1.2,
         foundElements: []
-    }
+    };
 }
 
 openFile.addEventListener('click', () => {
@@ -133,7 +135,7 @@ input.addEventListener('change', event => {
         reader.onload = () => {
             loadPDF(reader.result);
             zoomButton.disabled = false;
-        }
+        };
     } else {
         alert("Il file che stai cercando di aprire non è un file PDF!");
     }
@@ -147,7 +149,7 @@ function loadPDF(data) {
         currentPDF.countOfPages = doc.numPages;
         viewer.classList.remove('hidden');
         document.querySelector('main h3').classList.add("hidden");
-        const toolPdfBtnsDiv = document.getElementById('tool-pdf-btns-div')
+        const toolPdfBtnsDiv = document.getElementById('tool-pdf-btns-div');
         toolPdfBtnsDiv.classList.remove("hidden");
         document.getElementById('navbar-collapse-btn').classList.add("navbar-collapse-animation");
         processAllPages();
@@ -176,16 +178,12 @@ function processPage(page) {
             var regex = new RegExp(regexPattern, regexFlags);
             var matches = pageText.match(regex);
             if (matches) { 
-                //true se trova la parola nel PDF
-                //foundElements contiene gli elementi trovati fin ora
                 let foundElement = currentPDF.foundElements.find(element => element.word === word);
-                //find scorre ogni element del pdf e controlla se la sua word corrisponda alla specifica word ceh ci interessa
                 if (foundElement) {
                     foundElement.count += matches.length;
                     foundElement.pages.push(page.pageNumber);
                 } else {
                     let sdg = sdgMapping[word] || "N/A";
-                    // se non trovo l'elemento tra la lista di quelli gia' creati, allora creo un nuovo risultato in foundElements
                     currentPDF.foundElements.push({ word, count: matches.length, pages: [page.pageNumber], sdg });
                 }
             }
@@ -193,13 +191,10 @@ function processPage(page) {
     });
 }
 
-
 function displaySearchResults() {
     let resultsHTML = '<table class="table">';
     resultsHTML += '<thead><tr><th>Keyword</th><th>Count</th>';
-    if (displayPagesCheckbox.checked) {
-        resultsHTML += '<th>Pages</th>';
-    }
+    resultsHTML += '<th>Pages</th>';
     if (displaySdgGriClm.checked) {
         resultsHTML += '<th>SDG</th></tr></thead><tbody>';
     } else {
@@ -207,37 +202,29 @@ function displaySearchResults() {
     }
     currentPDF.foundElements.forEach((element) => {
         resultsHTML += `<tr><td>${element.word}</td><td>${element.count}</td>`;
-        if (displayPagesCheckbox.checked) {
-            // resultsHTML += `<td>${element.pages.join(', ')}</td>`;
-            // creare un pulsante per ogni pagina
-            console.log(element.pages)
+        if (displayPagesBtns.checked) {
             resultsHTML += `<td>`;
             element.pages.sort().forEach(page => {
-                console.log(page)
-                resultsHTML += `<a type="button" id="page-${page}" href="#scrollspyHeading4" class="btn btn-outline-secondary" style="margin: 2px;">${page}</a>`;
+                resultsHTML += `<a type="button" id="page-${page}" href="#scrollspyHeading4" class="btn btn-outline-secondary" style="margin: 1px 2px;">${page}</a>`;
             }); 
             resultsHTML += `</td>`;
+        } else {
+            resultsHTML += `<td>`;
+            element.pages.sort().forEach((page, index) => {
+                resultsHTML += `<span>${page}</span>`;
+                if (index < element.pages.length - 1) {
+                    resultsHTML += ', ';
+                }
+            });
+            resultsHTML += `</td>`;
         }
-        console.log(displaySdgGriClm.checked)
         if (displaySdgGriClm.checked) { resultsHTML += `<td>${element.sdg}</td></tr>` } else {}
     });
 
     resultsHTML += '</tbody></table>';
     searchResults.innerHTML = resultsHTML;
-    //searchResults.innerHTML += '<button id="search-again" class="btn btn-dark mt-3"><i class="fa-solid fa-repeat"></i> Cerca di nuovo sullo stesso PDF</button>';
     renderCurrentPage();
-
-    //document.getElementById('search-again').addEventListener('click', () => {
-    //   const keywordsInput = prompt('Inserisci nuove parole chiave separate da virgola:');
-    //   if (keywordsInput) {
-    //       wordsToSearch = keywordsInput.split(',').map(keyword => keyword.trim());
-    //       currentPDF.foundElements = [];
-    //       startPage = parseInt(prompt('Inserisci il numero della pagina da cui iniziare la ricerca:', '1')) || 1;
-    //       processAllPages();
-    //   }
-    //);
 }
-
 
 function renderCurrentPage() {
     currentPDF.file.getPage(currentPDF.currentPage).then((page) => {
@@ -251,13 +238,40 @@ function renderCurrentPage() {
             viewport: viewport
         };
 
-        page.render(renderContext);
-
-        currentPage.innerHTML = currentPDF.currentPage + ' of ' + currentPDF.countOfPages;
+        page.render(renderContext).promise.then(() => {
+            viewer.style.display = 'block';
+            currentPage.innerHTML = currentPDF.currentPage + ' of ' + currentPDF.countOfPages;
+        });
     });
 }
 
-//andare alla pagina relativa al pulsante premuto
+
+zoomCanvas.style.position = 'absolute';
+zoomCanvas.style.border = '1px solid black';
+zoomCanvas.style.display = 'none';
+zoomCanvas.width = 200; // Larghezza finestra zoom
+zoomCanvas.height = 200; // Altezza finestra zoom
+const zoomFactor = 2; // Fattore di zoom
+
+viewer.addEventListener('mousemove', function(event) {
+    const rect = viewer.getBoundingClientRect();
+    const x = event.clientX - rect.left;
+    const y = event.clientY - rect.top;
+    const zoomX = Math.max(0, Math.min(viewer.width - zoomCanvas.width / zoomFactor, x - (zoomCanvas.width / zoomFactor) / 2));
+    const zoomY = Math.max(0, Math.min(viewer.height - zoomCanvas.height / zoomFactor, y - (zoomCanvas.height / zoomFactor) / 2));
+
+    zoomContext.clearRect(0, 0, zoomCanvas.width, zoomCanvas.height);
+    zoomContext.drawImage(viewer, zoomX, zoomY, zoomCanvas.width / zoomFactor, zoomCanvas.height / zoomFactor, 0, 0, zoomCanvas.width, zoomCanvas.height);
+    
+    zoomCanvas.style.left = `${event.pageX + 20}px`; // Posizionamento a destra del mouse
+    zoomCanvas.style.top = `${event.pageY - zoomCanvas.height / 2}px`; // Centra verticalmente sul mouse
+    zoomCanvas.style.display = 'block';
+});
+
+viewer.addEventListener('mouseout', function() {
+    zoomCanvas.style.display = 'none';
+});
+
 document.getElementById('search-results').addEventListener('click', (event) => {
     if (event.target.tagName === 'A') {
         currentPDF.currentPage = parseInt(event.target.textContent);
@@ -266,17 +280,17 @@ document.getElementById('search-results').addEventListener('click', (event) => {
 });
 
 document.getElementById('next').addEventListener('click', () => {
-	const isValidPage = currentPDF.currentPage < currentPDF.countOfPages;
-	if (isValidPage) {
+    const isValidPage = currentPDF.currentPage < currentPDF.countOfPages;
+    if (isValidPage) {
         currentPDF.currentPage += 1;
-		renderCurrentPage();
-	}
+        renderCurrentPage();
+    }
 });
 
 document.getElementById('prev').addEventListener('click', () => {
-	const isValidPage = currentPDF.currentPage < currentPDF.countOfPages;
-	if (isValidPage) {
-		currentPDF.currentPage -= 1;
-		renderCurrentPage();
-	}
+    const isValidPage = currentPDF.currentPage < currentPDF.countOfPages;
+    if (isValidPage) {
+        currentPDF.currentPage -= 1;
+        renderCurrentPage();
+    }
 });
