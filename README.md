@@ -7,6 +7,6 @@
 ## *Project description*
 > _Find a long list of KWs divided by `,`_
 
-- 🔗 (PDF_Keywords_finder)[https://gabrielemartire.github.io/find_for_me/]
+- 🔗 (PDF_Keywords_finder)[https://gabrielemartire.github.io/PDF_KWs_finder/]
 - 📌 (pdf.js)[https://mozilla.github.io/pdf.js/]
 - 📌 (cdnjs.com)[https://cdnjs.com/]
