@@ -29,7 +29,7 @@
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
               <button id="btn-import-pdf" type="button" class="btn nav-btns btn-outline-dark" data-bs-toggle="modal" data-bs-target="#ModalImprot" style="border: #8C0303 1px solid !important;">
-                <i class="fa-solid fa-file-pdf pdf-icon" style="color: #8C0303;"></i>Import PDF
+                <i class="fa-solid fa-file-pdf pdf-icon" style="color: #8C0303; margin-right: 3px;"></i>Import PDF
               </button>
             </li>
             <li class="nav-item">
@@ -41,15 +41,18 @@
               </button>
             </li>
             <li class="nav-item"></li>
-              <div id="tool-pdf-btns-div" class="btn-group me-2 nav-btns hidden" role="group" aria-label="First group">  
-                <a type="button" class="btn btn-outline-secondary" href="#scrollspyHeading4">
-                    <i class="fa-solid fa-file-pdf pdf-icon navbar-collapse-animation"></i> toolbox
-                </a>
-                <!-- <button class="btn btn-outline-secondary" disabled>
+              <div id="tool-pdf-btns-div" class="btn-group me-2 nav-btns hidden" role="group" aria-label="First group">
+                <!-- <button type="button" class="btn btn-outline-secondary" href="#scrollspyHeading4" disabled>
+                  <i class="fa-solid fa-file-pdf pdf-icon navbar-collapse-animation"></i>
+                </button>
+                <button class="btn btn-outline-secondary" disabled>
                     <i class="fa-solid fa-file-export"></i> Export this result
                 </button> -->
+                <button id="first_page" type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-angles-left"></i></button>
                 <button id="prev" type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-angle-left"></i></button>
+                <!-- show pdf page  -->
                 <button id="next" type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-angle-right"></i></button>
+                <button id="last_page" type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-angles-right"></i></button>
                 <!-- <button type="button" class="btn btn-outline-secondary" disabled><i class="fa-solid fa-repeat"></i></button> -->
               </div>
             </li>
@@ -93,10 +96,10 @@
                   <div class="row align-items-center mb-3 g-3">
                     <div class="col-auto">
                       <input type="checkbox" class="form-check-input" id="allow-Sdg-Gri" /> 
-                      <label class="form-check-label" for="allow-Sdg-Gri">SDG/GRI search</label>
+                      <label class="form-check-label" for="allow-Sdg-Gri">SDG/GRI search - insert starting page for SDG tables</label>
                     </div>
                     <div class="col-auto">
-                      <input type="number" class="form-control" id="page-to-start-search" placeholder="starting page for SDG tables" min="1" aria-describedby="pageToStartSearch">
+                      <input type="number" class="form-control" id="page-to-start-search" placeholder="insert page" min="1" aria-describedby="pageToStartSearch">
                     </div>
                   </div>
 
@@ -152,16 +155,16 @@
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                   <div class="ms-2 me-auto">
-                      Link to the page where the KW is founded
+                    Link to the page where the KW is founded
                   </div>
-                  <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-check"></i></span>
+                  <span class="badge text-bg-success rounded-pill">NEW <i class="fa-solid fa-rocket"></i></span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-start">
+                <!-- <li class="list-group-item d-flex justify-content-between align-items-start">
                   <div class="ms-2 me-auto">
                     Mouse Zoom
                   </div>
                   <span class="badge text-bg-success rounded-pill">NEW <i class="fa-solid fa-rocket"></i></span>
-                </li>
+                </li> -->
                 <!-- <li class="list-group-item d-flex justify-content-between align-items-start">
                   <div class="ms-2 me-auto">
                     2KWs: Ricerca se una KW del primo blocco e' nella stessa pagina di un secondo blocco di KWs, cosi da contestualizzare la KWs
@@ -211,11 +214,11 @@
     </div>
 
     <main style="flex-direction: row;">
-        <div class="container flex-container" style="flex-direction: column; margin-top: 11%">
-          <h3 class="main-page">Import a PDF with the red button above and start searching</h3>
-          <canvas id="canvas" class="pdf-viewer hidden" style="margin-top: 15px; max-width: 100%; width: 100%; height: auto; display: block;" onmousemove="zoom(event)"></canvas>
+        <div class="container flex-container" style="flex-direction: column; margin-top: 3%">
+          <h3 class="main-page">Import a PDF with the button above and start searching</h3>
+          <div id="search-results" style="background-color: #00000000;"></div>
+          <canvas id="canvas" class="pdf-viewer hidden" style="margin: 7px auto; border-radius: 15px; max-width: 100%; max-width: 50%; width: 100%; height: auto; display: block; cursor: default;"></canvas>
 
-          <div id="search-results" style="margin: 40px 0px;"></div>
         </div>
     </main>
     <script type="text/javascript" src="JS/index.js"></script>
