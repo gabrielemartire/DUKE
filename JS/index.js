@@ -189,7 +189,7 @@ function processPage(page) {
 }
 
 function displaySearchResults() {
-    let resultsHTML = '<table class="table" style="background-color: #00000000">';
+    let resultsHTML = '<table class="table">';
     resultsHTML += '<thead><tr><th>Keyword</th><th>Count</th>';
     resultsHTML += '<th>Pages</th>';
     if (displaySdgGriClm.checked) {
