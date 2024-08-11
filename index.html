@@ -15,13 +15,13 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
     <!-- title -->
-    <title>🔬PDF Keywords finder</title>
+    <title>🔬D.U.K.E.</title>
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary navbar">
       <div class="container-fluid justify-content-start">
-        <a class="navbar-brand" href="#">🔬PDF Keywords finder</a>
+        <a class="navbar-brand" href="#">🔬Document Utility for Keyword Extraction</a>
         <button id="navbar-collapse-btn" class="btn navbar-toggler" onclick="this.blur();" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
@@ -43,26 +43,20 @@
             <li class="nav-item"></li>
               <div id="tool-pdf-btns-div" class="btn-group me-2 nav-btns hidden" role="group" aria-label="First group">  
                 <a type="button" class="btn btn-outline-secondary" href="#scrollspyHeading4">
-                    <i class="fa-solid fa-file-pdf pdf-icon navbar-collapse-animation"></i>
+                    <i class="fa-solid fa-file-pdf pdf-icon navbar-collapse-animation"></i> toolbox
                 </a>
-                <button class="btn btn-outline-secondary" disabled>
+                <!-- <button class="btn btn-outline-secondary" disabled>
                     <i class="fa-solid fa-file-export"></i> Export this result
-                </button>
+                </button> -->
                 <button id="prev" type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-angle-left"></i></button>
                 <button id="next" type="button" class="btn btn-outline-secondary"><i class="fa-solid fa-angle-right"></i></button>
-                <button type="button" class="btn btn-outline-secondary" disabled><i class="fa-solid fa-repeat"></i></button>
+                <!-- <button type="button" class="btn btn-outline-secondary" disabled><i class="fa-solid fa-repeat"></i></button> -->
               </div>
             </li>
           </ul>
           <div>
-            <a href="https://github.com/gabrielemartire" target="_blank" style="text-decoration: none;">
-              <button type="button" class="btn btn-outline-secondary nav-btns"><i class="fa-solid fa-bug bug-icon" style="color: #43314e;"></i></button>
-            </a>
-            <a href="https://github.com/gabrielemartire/find_for_me/tree/main" target="_blank" style="text-decoration: none;">
+            <a href="https://github.com/gabrielemartire/DUKE/" target="_blank" style="text-decoration: none;">
               <button type="button" class="btn btn-outline-secondary nav-btns"><i class="fa-brands fa-github" style="color: #43314e;"></i></button>
-            </a>
-            <a href="#" target="_blank" style="text-decoration: none;">
-              <button type="button" class="btn btn-outline-secondary nav-btns" disabled><i class="fa-solid fa-broom-ball" style="color: #43314e;"></i></button>
             </a>
         </div>
         </div>
@@ -79,7 +73,7 @@
                 </div>
                 <div class="modal-body">
                   <div class="mb-3">
-                    <label for="keywords-text-area" class="form-label">ParoleChiave</label>
+                    <label for="keywords-text-area" class="form-label">KeyWords</label>
                     <textarea class="form-control" id="keywords-text-area" placeholder="inserisci qui la parole chiave da cercare"></textarea>
                   </div>
                   <div class="mb-3 ">
@@ -168,7 +162,7 @@
                   </div>
                   <span class="badge text-bg-success rounded-pill">NEW <i class="fa-solid fa-rocket"></i></span>
                 </li>
-                <li class="list-group-item d-flex justify-content-between align-items-start">
+                <!-- <li class="list-group-item d-flex justify-content-between align-items-start">
                   <div class="ms-2 me-auto">
                     2KWs: Ricerca se una KW del primo blocco e' nella stessa pagina di un secondo blocco di KWs, cosi da contestualizzare la KWs
                   </div>
@@ -209,7 +203,7 @@
                         Generatore di KWs
                     </div>
                     <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-xmark"></i></span>
-                </li>
+                </li> -->
             </ol>
           </div>
         </div>
@@ -219,7 +213,8 @@
     <main style="flex-direction: row;">
         <div class="container flex-container" style="flex-direction: column; margin-top: 11%">
           <h3 class="main-page">Importa un PDF con il tasto in alto e inizia la ricerca 🔬</h3>
-          <canvas id="canvas" class="pdf-viewer hidden" style="margin-top: 15px;" onmousemove="zoom(event)"></canvas>
+          <canvas id="canvas" class="pdf-viewer hidden" style="margin-top: 15px; max-width: 100%; width: 100%; height: auto; display: block;" onmousemove="zoom(event)"></canvas>
+
           <div id="search-results" style="margin: 40px 0px;"></div>
         </div>
     </main>
