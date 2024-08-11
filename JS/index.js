@@ -3,6 +3,7 @@ const openFile = document.getElementById('openPDF');
 const currentPage = document.getElementById('current_page');
 const viewer = document.getElementById('canvas');
 const searchResults = document.getElementById('search-results');
+const pagesPdf = document.getElementById('pages-pdf');
 const searchAgainButton = document.getElementById('search-again');
 const pageToStartSearch = document.getElementById('page-to-start-search');
 const caseSensitiveSearchCheckbox = document.getElementById('case-sensitive-search');
@@ -234,6 +235,7 @@ function renderCurrentPage() {
             canvasContext: context,
             viewport: viewport
         };
+        pagesPdf.innerHTML = currentPDF.currentPage + ' of ' + currentPDF.countOfPages;
 
         page.render(renderContext).promise.then(() => {
             viewer.style.display = 'block';
@@ -253,6 +255,7 @@ document.getElementById('first_page').addEventListener('click', () => {
     const isValidPage = currentPDF.currentPage > 0
     if (isValidPage) {
         currentPDF.currentPage = 1;
+        pagesPdf.innerHTML = currentPDF.currentPage + ' of ' + currentPDF.countOfPages;
         renderCurrentPage();
     }
 });
@@ -261,6 +264,8 @@ document.getElementById('prev').addEventListener('click', () => {
     const isValidPage = currentPDF.currentPage > 0
     if (isValidPage) {
         currentPDF.currentPage -= 1;
+        console.log(currentPDF.currentPage)
+        pagesPdf.innerHTML = currentPDF.currentPage + ' of ' + currentPDF.countOfPages;
         renderCurrentPage();
     }
 });
@@ -269,6 +274,7 @@ document.getElementById('next').addEventListener('click', () => {
     const isValidPage = currentPDF.currentPage < currentPDF.countOfPages;
     if (isValidPage) {
         currentPDF.currentPage += 1;
+        pagesPdf.innerHTML = currentPDF.currentPage + ' of ' + currentPDF.countOfPages;
         renderCurrentPage();
     }
 });
@@ -277,6 +283,7 @@ document.getElementById('last_page').addEventListener('click', () => {
     const isValidPage = currentPDF.currentPage < currentPDF.countOfPages;
     if (isValidPage) {
         currentPDF.currentPage = currentPDF.countOfPages;
+        pagesPdf.innerHTML = currentPDF.currentPage + ' of ' + currentPDF.countOfPages;
         renderCurrentPage();
     }
 });
