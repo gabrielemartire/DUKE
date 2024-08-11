@@ -28,13 +28,13 @@
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <button id="btn-import-pdf" type="button" class="btn nav-btns btn-outline-dark" data-bs-toggle="modal" data-bs-target="#ModalImprot">
-                <i class="fa-solid fa-file-pdf pdf-icon" style="color: #8C0303;"></i> Importa PDF
+              <button id="btn-import-pdf" type="button" class="btn nav-btns btn-outline-dark" data-bs-toggle="modal" data-bs-target="#ModalImprot" style="border: #8C0303 1px solid !important;">
+                <i class="fa-solid fa-file-pdf pdf-icon" style="color: #8C0303;"></i>Import PDF
               </button>
             </li>
             <li class="nav-item">
               <button type="button" class="btn btn-outline-dark nav-btns position-relative" data-bs-toggle="modal" data-bs-target="#ModalNews">
-                <i class="fa-solid fa-flask news-icon" style="color: #198754;"></i> Sviluppi
+                <i class="fa-solid fa-flask news-icon" style="color: #198754;"></i> Developments
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
                   1
                 </span>
@@ -68,35 +68,35 @@
         <div class="modal-dialog modal-lg">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title"><i class="fa-solid fa-file-pdf"></i> Importa PDF</h5>
+                    <h5 class="modal-title"><i class="fa-solid fa-file-pdf"></i> Import PDF</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                   <div class="mb-3">
                     <label for="keywords-text-area" class="form-label">KeyWords</label>
-                    <textarea class="form-control" id="keywords-text-area" placeholder="inserisci qui la parole chiave da cercare"></textarea>
+                    <textarea class="form-control" id="keywords-text-area" placeholder="insert here the keywords to search" rows="3"></textarea>
                   </div>
                   <div class="mb-3 ">
 
                   </div>
                   <div class="mb-3 g-3">
                       <input type="checkbox" class="form-check-input" id="case-sensitive-search" checked /> 
-                      <label class="form-check-label" for="case-sensitive-search">Ricerca case sensitive</label>
+                      <label class="form-check-label" for="case-sensitive-search">case-sensitive search</label>
                   </div>
 
                   <div class="mb-3 g-3">
                     <input type="checkbox" class="form-check-input" id="btns-pages" checked /> 
-                    <label class="form-check-label" for="display-pages">Mostra pagine come bottoni</label>
+                    <label class="form-check-label" for="display-pages">show pages as buttons</label>
                   </div>
 
 
                   <div class="row align-items-center mb-3 g-3">
                     <div class="col-auto">
                       <input type="checkbox" class="form-check-input" id="allow-Sdg-Gri" /> 
-                      <label class="form-check-label" for="allow-Sdg-Gri">Ricerca per SDG/GRI</label>
+                      <label class="form-check-label" for="allow-Sdg-Gri">SDG/GRI search</label>
                     </div>
                     <div class="col-auto">
-                      <input type="number" class="form-control" id="page-to-start-search" placeholder="pagina tabelle SDG" min="1" aria-describedby="pageToStartSearch">
+                      <input type="number" class="form-control" id="page-to-start-search" placeholder="starting page for SDG tables" min="1" aria-describedby="pageToStartSearch">
                     </div>
                   </div>
 
@@ -115,50 +115,50 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="ModalNewsLabel"><i class="fa-solid fa-flask object"></i> Sviluppi</h1>
+            <h1 class="modal-title fs-5" id="ModalNewsLabel"><i class="fa-solid fa-flask object"></i>Developments</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
             <ol class="list-group list-group-numbered">
-                <li class="list-group-item d-flex justify-content-between align-items-start">
+                <!-- <li class="list-group-item d-flex justify-content-between align-items-start">
                     <div class="ms-2 me-auto">
                         Nuova ricerca senza nuovo import
                     </div>
                     <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-check"></i></span>
-                </li>
+                </li> -->
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                   <div class="ms-2 me-auto">
-                      Scelta case sensitive si/no
+                    Add case-sensitive y/n
                   </div>
                   <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-check"></i></span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                   <div class="ms-2 me-auto">
-                      colonna pagina pdf della KW trovata
+                    show WK's page in the search result
                   </div>
                   <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-check"></i></span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                   <div class="ms-2 me-auto">
-                      Associazione Disclosure / GRI
+                      Disclosure / GRI association
                   </div>
                   <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-check"></i></span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                   <div class="ms-2 me-auto">
-                      Avvio ricerca da pagina specifica (nota: inserire la pagina da dove sono presenti le tabelle GRI)
+                    Start search from a specific page (note: enter the page where the GRI tables start)
                   </div>
                   <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-check"></i></span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                   <div class="ms-2 me-auto">
-                      Link diretta alla pagina con KW trovata 
+                      Link to the page where the KW is founded
                   </div>
                   <span class="badge text-bg-secondary rounded-pill"><i class="fa-solid fa-check"></i></span>
                 </li>
                 <li class="list-group-item d-flex justify-content-between align-items-start">
                   <div class="ms-2 me-auto">
-                      Zoom Relativo rispetto al mouse 
+                    Mouse Zoom
                   </div>
                   <span class="badge text-bg-success rounded-pill">NEW <i class="fa-solid fa-rocket"></i></span>
                 </li>
@@ -212,7 +212,7 @@
 
     <main style="flex-direction: row;">
         <div class="container flex-container" style="flex-direction: column; margin-top: 11%">
-          <h3 class="main-page">Importa un PDF con il tasto in alto e inizia la ricerca 🔬</h3>
+          <h3 class="main-page">Import a PDF with the red button above and start searching</h3>
           <canvas id="canvas" class="pdf-viewer hidden" style="margin-top: 15px; max-width: 100%; width: 100%; height: auto; display: block;" onmousemove="zoom(event)"></canvas>
 
           <div id="search-results" style="margin: 40px 0px;"></div>
