@@ -15,26 +15,27 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Display:ital,wght@0,100..900;1,100..900&family=Pixelify+Sans:wght@400..700&display=swap" rel="stylesheet">
     <!-- title -->
-    <title>🔬D.U.K.E.</title>
+    <title>D.U.K.E.</title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
 </head>
 
 <body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary navbar">
       <div class="container-fluid justify-content-start">
-        🔬Document Utility for Keyword Extraction
+        Document Utility for Keyword Extraction
         <button id="navbar-collapse-btn" class="btn navbar-toggler" onclick="this.blur();" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <button id="btn-import-pdf" type="button" class="btn nav-btns btn-outline-dark" data-bs-toggle="modal" data-bs-target="#ModalImprot" style="border: #8C0303 1px solid !important;">
-                <i class="fa-solid fa-file-pdf pdf-icon" style="color: #8C0303; margin-right: 3px;"></i>Import PDF
+              <button id="btn-import-pdf" type="button" class="btn nav-btns btn-outline-dark" data-bs-toggle="modal" data-bs-target="#ModalImprot" style="border: #43314e 1px solid !important;">
+                <i class="fa-solid fa-file-pdf pdf-icon" style="color: #43314e; margin-right: 3px;"></i>Import PDF
               </button>
             </li>
             <li class="nav-item">
               <button type="button" class="btn btn-outline-dark nav-btns position-relative" data-bs-toggle="modal" data-bs-target="#ModalNews">
-                <i class="fa-solid fa-flask news-icon" style="color: #198754;"></i> Developments
+                <i class="fa-solid fa-newspaper" style="color: gray;"></i> Developments
                 <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
                   1
                 </span>
@@ -119,7 +120,7 @@
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h1 class="modal-title fs-5" id="ModalNewsLabel"><i class="fa-solid fa-flask object"></i>Developments</h1>
+            <h1 class="modal-title fs-5" id="ModalNewsLabel"><i class="fa-solid fa-newspaper" style="color: gray;"></i> Developments</h1>
             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
           </div>
           <div class="modal-body">
