@@ -2,7 +2,7 @@
 	font-family: "Noto Sans Display", sans-serif;
 }
 
-body, main{
+main{
 	background-color: #43314e;
 }
 
@@ -13,6 +13,15 @@ main{
 	flex-direction: column;
 	justify-content: center;
 	align-items: center;
+}
+
+html, body { background-color: #43314e !important;} 
+
+nav {
+	margin: 10px !important;
+	border-radius: 15px !important;
+	background-color: #faf5fd !important;
+
 }
 
 li{
@@ -29,8 +38,9 @@ li{
 }
 
 .nav-btns {
-	margin-top: 10px;
-	margin-left: 10px;
+	margin-left: 15px;
+	margin-top: 3px;
+	margin-bottom: 3px;
 }
 
 .pagination{
@@ -47,6 +57,15 @@ li{
 	margin: auto;
 }
 
+tr, td, th {
+	background-color: transparent !important;
+	border: none !important;
+}
+
+table {
+	background-color: white;
+	border-radius: 15px;
+}
 
 .news-icon:hover {
 	/* fain modo che l'oggetto sia animato e si inclini di poco per poi tornare dritto*/
