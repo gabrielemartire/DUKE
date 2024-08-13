@@ -203,7 +203,7 @@ function displaySearchResults() {
         if (displayPagesBtns.checked) {
             resultsHTML += `<td>`;
             element.pages.sort(function(a, b) { return a - b; }).forEach(page => {
-                resultsHTML += `<a type="button" id="page-${page}" href="#scrollspyHeading4" class="btn btn-outline-secondary" style="margin: 1px 2px;">${page}</a>`;
+                resultsHTML += `<a type="button" id="page-${page}" class="btn btn-outline-secondary" style="margin: 1px 2px;">${page}</a>`;
             }); 
             resultsHTML += `</td>`;
         } else {
