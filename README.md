@@ -1,4 +1,4 @@
-# Document Utility for Keyword Extraction - D.U.K.E.
+# Document Utility for Keywords Extraction - D.U.K.E.
 > a PDF Keywords finder
 
 <div>
