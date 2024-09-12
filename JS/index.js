@@ -14,6 +14,7 @@ let currentPDF = {};
 let wordsToSearch = [];
 let startPage = 1;
 let pdfImportedStatus = false;
+let fileName = ""
 
 const sdgMapping = {
     "2-7": [" SDG 8", " SDG 10"],
@@ -127,16 +128,17 @@ openFile.addEventListener('click', () => {
 
 input.addEventListener('change', event => {
     const inputFile = event.target.files[0];
+    fileName = inputFile.name;
     if (inputFile.type === 'application/pdf') {
         const reader = new FileReader();
         reader.readAsDataURL(inputFile);
         reader.onload = () => {
             loadPDF(reader.result);
-            zoomButton.disabled = false;
         };
     } else {
         alert("Il file che stai cercando di aprire non è un file PDF!");
     }
+    document.title = "D.U.K.E. - " + fileName;
 });
 
 function loadPDF(data) {
@@ -190,7 +192,8 @@ function processPage(page) {
 }
 
 function displaySearchResults() {
-    let resultsHTML = '<table class="table">';
+    let resultsHTML = '<div style="margin: 1%; color: aliceblue;">'+fileName+'</div>';
+    resultsHTML += '<table class="table">';
     resultsHTML += '<thead><tr><th>Keyword</th><th>Count</th>';
     resultsHTML += '<th>Pages</th>';
     if (displaySdgGriClm.checked) {
@@ -218,7 +221,6 @@ function displaySearchResults() {
         }
         if (displaySdgGriClm.checked) { resultsHTML += `<td>${element.sdg}</td></tr>` } else {}
     });
-
     resultsHTML += '</tbody></table>';
     searchResults.innerHTML = resultsHTML;
     renderCurrentPage();
@@ -251,6 +253,7 @@ document.getElementById('search-results').addEventListener('click', (event) => {
     }
 });
 
+// go to page 1
 document.getElementById('first_page').addEventListener('click', () => {
     const isValidPage = currentPDF.currentPage > 0
     if (isValidPage) {
@@ -260,8 +263,9 @@ document.getElementById('first_page').addEventListener('click', () => {
     }
 });
 
+// go to previous page
 document.getElementById('prev').addEventListener('click', () => {
-    const isValidPage = currentPDF.currentPage > 0
+    const isValidPage = currentPDF.currentPage > 1
     if (isValidPage) {
         currentPDF.currentPage -= 1;
         console.log(currentPDF.currentPage)
@@ -270,6 +274,7 @@ document.getElementById('prev').addEventListener('click', () => {
     }
 });
 
+// go to next page
 document.getElementById('next').addEventListener('click', () => {
     const isValidPage = currentPDF.currentPage < currentPDF.countOfPages;
     if (isValidPage) {
@@ -279,6 +284,7 @@ document.getElementById('next').addEventListener('click', () => {
     }
 });
 
+// go to last page
 document.getElementById('last_page').addEventListener('click', () => {
     const isValidPage = currentPDF.currentPage < currentPDF.countOfPages;
     if (isValidPage) {
